@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -14,13 +15,23 @@ import {
   IonItem,
   IonLabel,
   IonButton,
+  IonButtons,
   IonIcon,
   IonChip,
   IonSpinner,
-  ToastController
+  IonPopover,
+  ToastController,
+  AlertController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { searchOutline, closeOutline } from 'ionicons/icons';
+import {
+  searchOutline,
+  closeOutline
+} from 'ionicons/icons';
+
+// Import services and components
+import { AuthService } from '../services/auth.service';
+import { MenuComponent } from '../shared/menu/menu.component';
 
 // 📋 Interface for search results
 export interface SearchResult {
@@ -49,7 +60,8 @@ export interface SearchResult {
     IonButton,
     IonIcon,
     IonChip,
-    IonSpinner
+    IonSpinner,
+    MenuComponent
   ]
 })
 export class Tab2Page implements OnInit {
@@ -71,7 +83,10 @@ export class Tab2Page implements OnInit {
 
   constructor(private toastController: ToastController) {
     // Register icons for use in template
-    addIcons({ searchOutline, closeOutline });
+    addIcons({
+      searchOutline,
+      closeOutline
+    });
   }
 
   ngOnInit() {
@@ -152,4 +167,6 @@ export class Tab2Page implements OnInit {
   isValidSearchTerm(term: string): boolean {
     return !!term && term.trim().length >= 2;
   }
+
+
 }

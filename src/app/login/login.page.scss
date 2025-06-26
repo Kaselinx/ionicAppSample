@@ -95,10 +95,6 @@
     --box-shadow: 0 6px 16px rgba(var(--ion-color-primary-rgb), 0.4);
     transform: translateY(-1px);
   }
-
-  &.button-disabled {
-    opacity: 0.6;
-  }
 }
 
 .demo-section {
@@ -107,16 +103,18 @@
   border-top: 1px solid #e9ecef;
   text-align: center;
 
+  .demo-text, .demo-info {
+    color: var(--ion-color-medium);
+  }
+
   .demo-text {
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--ion-color-medium);
     margin-bottom: 8px;
   }
 
   .demo-info {
     font-size: 0.8rem;
-    color: var(--ion-color-medium);
     margin-top: 8px;
     font-style: italic;
   }
@@ -140,47 +138,22 @@
 
 // Responsive design
 @media (max-width: 480px) {
-  .login-container {
-    padding: 16px;
-  }
-
-  .app-header {
-    h1 {
-      font-size: 2rem;
-    }
-
-    p {
-      font-size: 1rem;
-    }
-  }
-
-  .login-card {
-    ion-card-content {
-      padding: 16px;
-    }
-  }
+  .login-container { padding: 16px; }
+  .app-header h1 { font-size: 2rem; }
+  .app-header p { font-size: 1rem; }
+  .login-card ion-card-content { padding: 16px; }
 }
 
 // Dark mode support
 @media (prefers-color-scheme: dark) {
   .login-card {
     background: rgba(30, 30, 30, 0.95);
-    
-    ion-card-title {
-      color: var(--ion-color-primary-tint);
-    }
+    ion-card-title { color: var(--ion-color-primary-tint); }
   }
-
   .input-item {
     --background: #2a2a2a;
     --border-color: #404040;
-
-    ion-label {
-      color: var(--ion-color-light);
-    }
+    ion-label { color: var(--ion-color-light); }
   }
-
-  .demo-section {
-    border-top-color: #404040;
-  }
+  .demo-section { border-top-color: #404040; }
 }

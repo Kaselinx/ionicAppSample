@@ -18,11 +18,13 @@ import {
   IonCardTitle,     // Card title
   IonCardContent,   // Card content area
   IonButton,        // Action buttons
+  IonButtons,       // Buttons container
   IonIcon,          // Icons for visual elements
   IonItem,          // List items for user details
   IonLabel,         // Text labels
   IonAvatar,        // User profile picture container
   IonList,          // List container
+  IonPopover,       // Popover component
   AlertController,  // Service for confirmation dialogs
   ToastController   // Service for notification messages
 } from '@ionic/angular/standalone';
@@ -34,15 +36,16 @@ import {
   mailOutline,             // Email icon
   calendarOutline,         // Calendar/date icon
   timeOutline,             // Time/clock icon
-  logOutOutline,           // Logout icon
-  settingsOutline,         // Settings icon
-  helpCircleOutline,       // Help icon
-  informationCircleOutline // Information icon
+  logOutOutline,           // Logout icon (needed for content buttons)
+  settingsOutline,         // Settings icon (needed for content buttons)
+  helpCircleOutline,       // Help icon (needed for content buttons)
+  informationCircleOutline // Information icon (needed for content buttons)
 } from 'ionicons/icons';
 
 // 🔐 Custom services - Business logic and data access
 import { AuthService, User } from '../services/auth.service'; // Authentication and user data
 import { ApiService } from '../services/api.service';         // Backend communication
+import { MenuComponent } from '../shared/menu/menu.component';
 
 // 🏗️ Component Decorator - Defines this as the Profile page component
 @Component({
@@ -65,7 +68,8 @@ import { ApiService } from '../services/api.service';         // Backend communi
     IonItem,
     IonLabel,
     IonAvatar,
-    IonList
+    IonList,
+    MenuComponent
   ],
 })
 // 🎯 Profile Page Class - Manages user profile display and actions
@@ -83,11 +87,11 @@ export class Tab4Page implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController
   ) {
-    addIcons({ 
-      personOutline, 
-      mailOutline, 
-      calendarOutline, 
-      timeOutline, 
+    addIcons({
+      personOutline,
+      mailOutline,
+      calendarOutline,
+      timeOutline,
       logOutOutline,
       settingsOutline,
       helpCircleOutline,
@@ -118,28 +122,9 @@ export class Tab4Page implements OnInit {
     }
   }
 
-  async logout() {
-    const alert = await this.alertController.create({
-      header: 'Confirm Logout',
-      message: 'Are you sure you want to logout?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Logout',
-          handler: async () => {
-            await this.authService.logout();
-            this.router.navigate(['/login'], { replaceUrl: true });
-          }
-        }
-      ]
-    });
 
-    await alert.present();
-  }
 
+  // 🎛️ Menu Methods - Needed for the action buttons in the profile content
   async showSettings() {
     const alert = await this.alertController.create({
       header: 'Settings',
@@ -163,6 +148,27 @@ export class Tab4Page implements OnInit {
       header: 'About TSApp',
       message: 'TSApp v1.0.0\nIonic Angular Capacitor Hybrid App\nBuilt with ❤️',
       buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async logout() {
+    const alert = await this.alertController.create({
+      header: 'Confirm Logout',
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Logout',
+          handler: async () => {
+            await this.authService.logout();
+            this.router.navigate(['/login'], { replaceUrl: true });
+          }
+        }
+      ]
     });
     await alert.present();
   }

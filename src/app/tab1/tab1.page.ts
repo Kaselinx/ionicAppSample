@@ -2,7 +2,6 @@
 // These imports provide type safety and IntelliSense support
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 
 // 📱 Ionic Components - Standalone imports for better tree-shaking
 import {
@@ -16,19 +15,16 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonButton,
-  IonButtons,
   IonIcon,
   IonSpinner,
   IonChip,
   ToastController,
-  AlertController,
   LoadingController
 } from '@ionic/angular/standalone';
 
 // 🎨 Icon imports - Only import what you need for performance
 import { addIcons } from 'ionicons';
 import {
-  logOutOutline,
   serverOutline,
   timeOutline,
   refreshOutline,
@@ -39,6 +35,7 @@ import {
 // 🔐 Custom Services - TypeScript interfaces provide type safety
 import { AuthService, User } from '../services/auth.service';
 import { ApiService, BackendMessage } from '../services/api.service';
+import { MenuComponent } from '../shared/menu/menu.component';
 
 // 🏗️ Component Decorator - Angular's way to define components
 // This gets compiled to JavaScript class with metadata
@@ -59,10 +56,10 @@ import { ApiService, BackendMessage } from '../services/api.service';
     IonCardSubtitle,              // Ionic card subtitle
     IonCardContent,               // Ionic card content
     IonButton,                    // Ionic button component
-    IonButtons,                   // Ionic buttons container
     IonIcon,                      // Ionic icon component
     IonSpinner,                   // Ionic loading spinner
-    IonChip                       // Ionic chip component
+    IonChip,                      // Ionic chip component
+    MenuComponent                 // Shared menu component
   ],
 })
 // 🎯 TypeScript Class - Gets compiled to JavaScript with type checking
@@ -78,21 +75,18 @@ export class Tab1Page implements OnInit {
   constructor(
     private authService: AuthService,        // 🔐 Authentication service
     private apiService: ApiService,          // 🌐 Backend communication service
-    private router: Router,                  // 🧭 Angular router for navigation
     private toastController: ToastController, // 🍞 Ionic toast notifications
-    private alertController: AlertController, // ⚠️ Ionic alert dialogs
     private loadingController: LoadingController // ⏳ Ionic loading spinners
   ) {
     // 🎨 Register icons for use in templates
     // This runs once when component is created
     console.log('🏗️ Tab1Page constructor called - Component being created');
     addIcons({
-      logOutOutline,   // Logout icon
-      serverOutline,   // Server/backend icon
-      timeOutline,     // Time/clock icon
-      refreshOutline,  // Refresh icon
-      wifiOutline,     // WiFi/connection icon
-      personOutline    // Person/user icon
+      serverOutline,           // Server/backend icon
+      timeOutline,             // Time/clock icon
+      refreshOutline,          // Refresh icon
+      wifiOutline,             // WiFi/connection icon
+      personOutline            // Person/user icon
     });
   }
 
@@ -265,46 +259,7 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  // 🚪 Logout - User authentication cleanup
-  // This demonstrates Ionic alerts and navigation
-  async logout() {
-    console.log('🚪 User initiated logout process');
-    console.log('👤 Current user before logout:', this.currentUser?.username);
 
-    // 🔔 Show confirmation dialog
-    const alert = await this.alertController.create({
-      header: 'Confirm Logout',
-      message: 'Are you sure you want to logout?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('❌ User cancelled logout');
-          }
-        },
-        {
-          text: 'Logout',
-          handler: async () => {
-            console.log('✅ User confirmed logout');
-            console.log('🔐 Calling AuthService.logout()...');
-
-            // Clear authentication data
-            await this.authService.logout();
-            console.log('🧹 Authentication data cleared');
-
-            // Navigate back to login page
-            console.log('🧭 Navigating to login page...');
-            this.router.navigate(['/login'], { replaceUrl: true });
-            console.log('✅ Logout process completed');
-          }
-        }
-      ]
-    });
-
-    console.log('🔔 Showing logout confirmation dialog');
-    await alert.present();
-  }
 
   // 🍞 Show Toast Notification - User feedback helper
   // This is a private utility method for showing messages
