@@ -1,0 +1,7 @@
+{
+  "name": "TSApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
