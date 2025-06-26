@@ -24,7 +24,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-menu',
   template: `
-    <ion-buttons slot="end">
+    <ion-buttons>
       <ion-button [id]="triggerId" fill="clear">
         <ion-icon name="menu-outline"></ion-icon>
       </ion-button>
