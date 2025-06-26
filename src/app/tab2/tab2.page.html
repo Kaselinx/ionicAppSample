@@ -1,17 +1,64 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Search</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Search</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="search-container">
+    <!-- Search Bar -->
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      (ionInput)="performSearch($event.detail.value!)"
+      placeholder="Search tutorials, guides, and references..."
+      [disabled]="isLoading">
+    </ion-searchbar>
+
+    <!-- Clear Button -->
+    <ion-button
+      *ngIf="hasSearched"
+      fill="clear"
+      (click)="clearSearch()"
+      class="clear-button">
+      <ion-icon name="close-outline" slot="start"></ion-icon>
+      Clear
+    </ion-button>
+
+    <!-- Search Summary -->
+    <div class="search-summary">
+      <p>{{ getSearchSummary() }}</p>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="loading-container">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+
+    <!-- Search Results -->
+    <ion-list *ngIf="!isLoading && searchResults.length > 0">
+      <ion-item
+        *ngFor="let result of searchResults"
+        button
+        (click)="selectResult(result)">
+        <ion-label>
+          <h2>{{ result.title }}</h2>
+          <p>{{ result.description }}</p>
+          <ion-chip color="primary" outline>{{ result.category }}</ion-chip>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- No Results Message -->
+    <div *ngIf="!isLoading && hasSearched && searchResults.length === 0" class="no-results">
+      <ion-icon name="search-outline" size="large"></ion-icon>
+      <h3>No results found</h3>
+      <p>Try searching with different keywords</p>
+    </div>
+  </div>
 </ion-content>
