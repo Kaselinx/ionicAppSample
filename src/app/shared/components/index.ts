@@ -3,3 +3,4 @@
 
 // Re-export existing components
 export * from './menu/menu.component';
+export * from './banner/banner.component';

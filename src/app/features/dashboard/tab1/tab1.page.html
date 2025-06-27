@@ -1,27 +1,47 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>
-      Home
-    </ion-title>
+    <ion-img
+      slot="start"
+      src="assets/images/banner.png"
+      alt="TSApp Banner"
+      class="header-banner">
+    </ion-img>
     <app-menu slot="end" triggerId="home-menu"></app-menu>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- 🎯 Custom Banner Component -->
 
   <div class="home-container">
-    <!-- Welcome Section -->
-    <ion-card class="welcome-card">
-      <ion-card-header>
-        <ion-card-title>Welcome, {{ currentUser?.username || 'User' }}!</ion-card-title>
-        <ion-card-subtitle>{{ currentTime | date:'medium' }}</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
+    <!-- 📢 Additional Banner Examples (you can remove these) -->
+
+    <!-- Info Banner with User Welcome -->
+    <app-banner
+      type="info"
+      [title]="'Welcome back, ' + (currentUser?.username || 'User') + '!'"
+      [message]="'Last login: ' + (currentTime | date:'short')"
+      icon="person-circle-outline">
+    </app-banner>
+
+    <!-- Success Banner Example -->
+    <app-banner
+      type="success"
+      title="System Status"
+      message="All systems are running smoothly"
+      icon="checkmark-circle-outline">
+    </app-banner>
+
+    <!-- Warning Banner Example -->
+    <app-banner
+      type="warning"
+      title="Maintenance Notice"
+      message="Scheduled maintenance on Sunday 2-4 AM"
+      icon="warning-outline"
+      actionText="Learn More"
+      actionColor="warning"
+      [dismissible]="true">
+    </app-banner>
 
     <!-- Backend Message Section -->
     <ion-card class="message-card">
