@@ -48,7 +48,7 @@ import {
 
 // 📋 Import the SearchResult interface - Defines the data structure
 // This ensures type safety when passing data between components
-import { SearchResult } from './tab2.page';
+import { SearchResult } from '../../core/models';
 
 // 🏗️ Component Decorator - Defines this as an Angular component
 // Components are the building blocks of Angular applications

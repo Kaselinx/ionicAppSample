@@ -34,7 +34,13 @@ import { addIcons } from 'ionicons';
 import { logInOutline, personOutline, lockClosedOutline } from 'ionicons/icons';
 
 // 🔐 Custom services and interfaces - Our business logic
-import { AuthService, LoginCredentials } from '../services/auth.service';
+import { AuthService } from '../../../core/services';
+
+// 📋 Login credentials interface
+interface LoginCredentials {
+  username: string;
+  password: string;
+}
 
 // 🏗️ Component Decorator - Defines this class as an Angular component
 // Similar to [Controller] attribute in ASP.NET MVC or @Controller in Spring

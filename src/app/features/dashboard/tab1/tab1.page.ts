@@ -33,9 +33,9 @@ import {
 } from 'ionicons/icons';
 
 // 🔐 Custom Services - TypeScript interfaces provide type safety
-import { AuthService, User } from '../services/auth.service';
-import { ApiService, BackendMessage } from '../services/api.service';
-import { MenuComponent } from '../shared/menu/menu.component';
+import { AuthService, ApiService } from '../../../core/services';
+import { User, BackendMessage } from '../../../core/models';
+import { MenuComponent } from '../../../shared/components';
 
 // 🏗️ Component Decorator - Angular's way to define components
 // This gets compiled to JavaScript class with metadata

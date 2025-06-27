@@ -43,9 +43,9 @@ import {
 } from 'ionicons/icons';
 
 // 🔐 Custom services - Business logic and data access
-import { AuthService, User } from '../services/auth.service'; // Authentication and user data
-import { ApiService } from '../services/api.service';         // Backend communication
-import { MenuComponent } from '../shared/menu/menu.component';
+import { AuthService, ApiService } from '../../../core/services'; // Core services
+import { User } from '../../../core/models';                       // Data models
+import { MenuComponent } from '../../../shared/components';        // Shared components
 
 // 🏗️ Component Decorator - Defines this as the Profile page component
 @Component({

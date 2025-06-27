@@ -25,7 +25,7 @@ import {
   notificationsOutline,
   personOutline
 } from 'ionicons/icons';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../core/services';
 
 @Component({
   selector: 'app-menu',

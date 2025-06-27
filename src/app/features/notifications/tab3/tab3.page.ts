@@ -5,8 +5,8 @@ import {
   IonTitle,
   IonContent
 } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-import { MenuComponent } from '../shared/menu/menu.component';
+import { ExploreContainerComponent } from '../../../explore-container/explore-container.component';
+import { MenuComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-tab3',

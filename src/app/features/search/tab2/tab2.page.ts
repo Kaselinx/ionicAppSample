@@ -31,27 +31,12 @@ import {
 } from 'ionicons/icons';
 
 // Import services and components
-import { MenuComponent } from '../shared/menu/menu.component';
-import { DetailModalComponent } from './detail-modal.component';
+import { MenuComponent } from '../../../shared/components';
+import { DetailModalComponent } from '../../../shared/modals';
+import { SearchService } from '../services/search.service';
 
-// 📋 SearchResult Interface - Defines the structure of search result data
-// TypeScript interfaces provide type safety and IntelliSense support
-// This ensures all search results have the same properties and data types
-export interface SearchResult {
-  id: number;          // Unique identifier for each search result
-  title: string;       // Main title/name of the content
-  description: string; // Brief description of the content
-  category: string;    // Content category (Tutorial, Guide, Reference, etc.)
-  author: string;      // Author/creator of the content
-  date: string;        // Publication or creation date (ISO format: YYYY-MM-DD)
-  summary: string;     // Detailed summary or abstract of the content
-}
-
-// 💡 Interface Benefits:
-// - Type Safety: Prevents errors by ensuring correct data types
-// - IntelliSense: IDE provides autocomplete and error checking
-// - Documentation: Serves as living documentation of data structure
-// - Refactoring: Easy to update all usages when structure changes
+// Import core models
+import { SearchResult } from '../../../core/models';
 
 @Component({
   selector: 'app-tab2',
@@ -84,20 +69,14 @@ export class Tab2Page implements OnInit {
   isLoading = false;                         // Loading state
   hasSearched = false;                       // Whether user has performed a search
 
-  // 🗄️ Mock data for demonstration
-  private mockData: SearchResult[] = [
-    { id: 1, title: 'Angular Basics', description: 'Learn Angular fundamentals', category: 'Tutorial' , author: 'Ron' , date: '2023-01-01' , summary: 'This is a summary of the Angular Basics tutorial'  },
-    { id: 2, title: 'TypeScript Guide', description: 'Master TypeScript programming', category: 'Guide', author: 'Jason' , date: '2023-02-01' , summary: 'This is a summary of the TypeScript Guide' },
-    { id: 3, title: 'Ionic Components', description: 'Explore Ionic UI components', category: 'Reference', author: 'John' , date: '2023-03-01' , summary: 'This is a summary of the Ionic Components reference' },
-    { id: 4, title: 'RxJS Observables', description: 'Reactive programming with RxJS', category: 'Tutorial', author: 'Summer' , date: '2023-04-01' , summary: 'This is a summary of the RxJS Observables tutorial' },
-    { id: 5, title: 'Unit Testing', description: 'Testing Angular applications', category: 'Guide', author: 'Victor' , date: '2023-05-01' , summary: 'This is a summary of the Unit Testing guide' }
-  ];
+  // 📊 Mock data is now handled by SearchService for better separation of concerns
 
   // 🏗️ Constructor - Dependency Injection for Services
   // Angular's dependency injection system automatically provides these services
   constructor(
     private toastController: ToastController,  // 🍞 Service for showing toast notifications
-    private modalController: ModalController   // 🎭 Service for creating and managing modals
+    private modalController: ModalController,  // 🎭 Service for creating and managing modals
+    private searchService: SearchService      // 🔍 Service for search functionality
   ) {
 
     // 🍞 ToastController Explanation:
@@ -126,9 +105,23 @@ export class Tab2Page implements OnInit {
 
   ngOnInit() {
     console.log('🔍 Search page initialized');
+
+    // 📊 Subscribe to search results from the service
+    this.searchService.results$.subscribe(results => {
+      this.searchResults = results;
+      console.log('📊 Search results updated:', results.length);
+    });
+
+    // ⏳ Subscribe to loading state from the service
+    this.searchService.loading$.subscribe(state => {
+      this.isLoading = state.isLoading;
+      if (state.error) {
+        this.showToast(`Search error: ${state.error}`);
+      }
+    });
   }
 
-  // 🔍 Search Method - Main functionality to test
+  // 🔍 Search Method - Now uses SearchService for better architecture
   async performSearch(searchTerm: string): Promise<void> {
     console.log('🔍 Performing search for:', searchTerm);
 
@@ -138,28 +131,22 @@ export class Tab2Page implements OnInit {
       return;
     }
 
-    this.isLoading = true;
     this.hasSearched = true;
 
-    // Simulate API delay
-    await this.delay(500);
+    // Use the search service - it handles loading state automatically
+    const results = await this.searchService.search(searchTerm);
 
-    // Filter mock data based on search term
-    this.searchResults = this.mockData.filter(item =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    this.isLoading = false;
-    console.log('✅ Search completed, found', this.searchResults.length, 'results');
+    console.log('✅ Search completed, found', results.length, 'results');
   }
 
-  // 🧹 Clear Search - Another method to test
+  // 🧹 Clear Search - Now uses SearchService
   clearSearch(): void {
     console.log('🧹 Clearing search');
     this.searchTerm = '';
-    this.searchResults = [];
     this.hasSearched = false;
+
+    // Clear results through the service
+    this.searchService.clearResults();
   }
 
   // 📊 Get Search Summary - Computed property to test
