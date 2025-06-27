@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import {
   IonButtons,
   IonButton,
@@ -11,7 +13,8 @@ import {
   IonItemDivider,
   IonLabel,
   IonContent,
-  AlertController
+  AlertController,
+  PopoverController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -141,13 +144,17 @@ import { AuthService } from '../../../core/services';
     IonContent
   ]
 })
-export class MenuComponent {
+export class MenuComponent implements OnDestroy {
   @Input() triggerId: string = 'menu-trigger';
+
+  // 🔄 Subscription management for cleanup
+  private navigationSubscription: Subscription | null = null;
 
   constructor(
     private alertController: AlertController,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private popoverController: PopoverController
   ) {
     addIcons({
       menuOutline,
@@ -160,14 +167,52 @@ export class MenuComponent {
       notificationsOutline,
       personOutline
     });
+
+    // 🔄 Subscribe to navigation events to auto-close menu
+    this.setupNavigationListener();
+  }
+
+  // 🧹 Cleanup method - Called when component is destroyed
+  ngOnDestroy(): void {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
+  // 🔄 Setup navigation listener to auto-close menu on route changes
+  private setupNavigationListener(): void {
+    this.navigationSubscription = this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd)
+      )
+      .subscribe(() => {
+        // Close any open popovers when navigation occurs
+        this.closeMenu();
+      });
+  }
+
+  // 🚪 Close menu method - Dismisses any open popovers
+  private async closeMenu(): Promise<void> {
+    try {
+      await this.popoverController.dismiss();
+    } catch (error) {
+      // Ignore errors if no popover is open
+    }
   }
 
   // 🧭 Navigation method for tab switching
-  navigateToTab(route: string) {
+  async navigateToTab(route: string) {
+    // 🚪 Close menu before navigation
+    await this.closeMenu();
+
+    // 🧭 Navigate to the selected tab
     this.router.navigate([route]);
   }
 
   async showSettings() {
+    // 🚪 Close menu first
+    await this.closeMenu();
+
     const alert = await this.alertController.create({
       header: 'Settings',
       message: 'Settings functionality coming soon!',
@@ -177,6 +222,9 @@ export class MenuComponent {
   }
 
   async showHelp() {
+    // 🚪 Close menu first
+    await this.closeMenu();
+
     const alert = await this.alertController.create({
       header: 'Help & Support',
       message: 'For support, please contact: support@tsapp.com',
@@ -186,6 +234,9 @@ export class MenuComponent {
   }
 
   async showAbout() {
+    // 🚪 Close menu first
+    await this.closeMenu();
+
     const alert = await this.alertController.create({
       header: 'About TSApp',
       message: 'TSApp v1.0.0\nIonic Angular Capacitor Hybrid App\nBuilt with ❤️',
@@ -206,7 +257,13 @@ export class MenuComponent {
         {
           text: 'Logout',
           handler: async () => {
+            // 🚪 Close menu first to prevent it staying open
+            await this.closeMenu();
+
+            // 🔐 Perform logout
             await this.authService.logout();
+
+            // 🧭 Navigate to login page
             this.router.navigate(['/login'], { replaceUrl: true });
           }
         }

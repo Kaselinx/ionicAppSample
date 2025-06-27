@@ -105,6 +105,37 @@
   }
 }
 
+// 🖼️ Header Banner Image Styling
+.header-banner {
+  // Keep original image dimensions
+  width: auto !important;
+  height: auto !important;
+  max-height: 40px; // Limit height to fit in toolbar
+
+  // Position in top-left corner
+  margin: 0;
+  padding: 0;
+
+  // Ensure it doesn't stretch or distort
+  object-fit: contain;
+
+  // Remove any default ionic styling
+  --border-radius: 0;
+
+  // Align to left side of toolbar
+  align-self: flex-start;
+}
+
+// Adjust toolbar to accommodate the image
+ion-toolbar {
+  --padding-start: 16px;
+  --padding-end: 16px;
+
+  // Ensure proper alignment
+  display: flex;
+  align-items: center;
+}
+
 // Dark mode support
 @media (prefers-color-scheme: dark) {
   .message-container h3 {

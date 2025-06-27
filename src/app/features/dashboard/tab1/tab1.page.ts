@@ -18,6 +18,7 @@ import {
   IonIcon,
   IonSpinner,
   IonChip,
+  IonImg,
   ToastController,
   LoadingController
 } from '@ionic/angular/standalone';
@@ -35,7 +36,7 @@ import {
 // 🔐 Custom Services - TypeScript interfaces provide type safety
 import { AuthService, ApiService } from '../../../core/services';
 import { User, BackendMessage } from '../../../core/models';
-import { MenuComponent } from '../../../shared/components';
+import { MenuComponent, BannerComponent } from '../../../shared/components';
 
 // 🏗️ Component Decorator - Angular's way to define components
 // This gets compiled to JavaScript class with metadata
@@ -48,6 +49,7 @@ import { MenuComponent } from '../../../shared/components';
     CommonModule,                 // Angular common directives (*ngIf, *ngFor, etc.)
     IonHeader,                    // Ionic header component
     IonToolbar,                   // Ionic toolbar component
+
     IonTitle,                     // Ionic title component
     IonContent,                   // Ionic content container
     IonCard,                      // Ionic card component
@@ -59,7 +61,9 @@ import { MenuComponent } from '../../../shared/components';
     IonIcon,                      // Ionic icon component
     IonSpinner,                   // Ionic loading spinner
     IonChip,                      // Ionic chip component
-    MenuComponent                 // Shared menu component
+    IonImg,                       // Ionic image component
+    MenuComponent,                // Shared menu component
+    BannerComponent               // Custom banner component
   ],
 })
 // 🎯 TypeScript Class - Gets compiled to JavaScript with type checking
