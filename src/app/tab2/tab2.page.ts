@@ -4,7 +4,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -15,15 +14,9 @@ import {
   IonItem,
   IonLabel,
   IonButton,
-  IonButtons,
   IonIcon,
   IonChip,
   IonSpinner,
-  IonModal,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
   ToastController,
   ModalController
 } from '@ionic/angular/standalone';
@@ -38,19 +31,27 @@ import {
 } from 'ionicons/icons';
 
 // Import services and components
-import { AuthService } from '../services/auth.service';
 import { MenuComponent } from '../shared/menu/menu.component';
+import { DetailModalComponent } from './detail-modal.component';
 
-// 📋 Interface for search results
+// 📋 SearchResult Interface - Defines the structure of search result data
+// TypeScript interfaces provide type safety and IntelliSense support
+// This ensures all search results have the same properties and data types
 export interface SearchResult {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  author: string;
-  date: string;
-  summary: string;
+  id: number;          // Unique identifier for each search result
+  title: string;       // Main title/name of the content
+  description: string; // Brief description of the content
+  category: string;    // Content category (Tutorial, Guide, Reference, etc.)
+  author: string;      // Author/creator of the content
+  date: string;        // Publication or creation date (ISO format: YYYY-MM-DD)
+  summary: string;     // Detailed summary or abstract of the content
 }
+
+// 💡 Interface Benefits:
+// - Type Safety: Prevents errors by ensuring correct data types
+// - IntelliSense: IDE provides autocomplete and error checking
+// - Documentation: Serves as living documentation of data structure
+// - Refactoring: Easy to update all usages when structure changes
 
 @Component({
   selector: 'app-tab2',
@@ -72,11 +73,6 @@ export interface SearchResult {
     IonIcon,
     IonChip,
     IonSpinner,
-    IonModal,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
     MenuComponent
   ]
 })
@@ -97,11 +93,34 @@ export class Tab2Page implements OnInit {
     { id: 5, title: 'Unit Testing', description: 'Testing Angular applications', category: 'Guide', author: 'Victor' , date: '2023-05-01' , summary: 'This is a summary of the Unit Testing guide' }
   ];
 
-  constructor(private toastController: ToastController) {
+  // 🏗️ Constructor - Dependency Injection for Services
+  // Angular's dependency injection system automatically provides these services
+  constructor(
+    private toastController: ToastController,  // 🍞 Service for showing toast notifications
+    private modalController: ModalController   // 🎭 Service for creating and managing modals
+  ) {
+
+    // 🍞 ToastController Explanation:
+    // ToastController creates small, temporary notification messages
+    // - create(): Creates a toast with message, duration, color, position
+    // - present(): Shows the toast on screen
+    // - dismiss(): Manually closes the toast (usually auto-dismisses)
+    // Perfect for quick feedback like "Search completed" or "Item selected"
+
+    // 🎭 ModalController Explanation:
+    // ModalController manages modal dialogs (popup windows)
+    // - create(): Creates modal with component and data
+    // - present(): Shows modal with slide-up animation
+    // - dismiss(): Closes modal and optionally returns data
+    // Great for detailed views, forms, or complex interactions
     // Register icons for use in template
     addIcons({
       searchOutline,
-      closeOutline
+      closeOutline,
+      personOutline,
+      calendarOutline,
+      documentTextOutline,
+      informationCircleOutline
     });
   }
 
@@ -159,10 +178,33 @@ export class Tab2Page implements OnInit {
       : `Found ${count} result${count === 1 ? '' : 's'}`;
   }
 
-  // 🎯 Select Result - Event handler to test
-  selectResult(result: SearchResult): void {
+  // 🎯 Select Result - Event handler when user taps a search result
+  // This method is called from the template when a search result is clicked
+  async selectResult(result: SearchResult): Promise<void> {
     console.log('🎯 Selected result:', result.title);
-    this.showToast(`Selected: ${result.title}`);
+    // Open detailed modal with the selected search result data
+    await this.openDetailModal(result);
+  }
+
+  // 📋 Open Detail Modal - Creates and displays detailed information modal
+  // This demonstrates how to pass data to a modal component
+  async openDetailModal(result: SearchResult): Promise<void> {
+    // 🎭 Create modal using ModalController
+    const modal = await this.modalController.create({
+      component: DetailModalComponent,        // Which component to show in modal
+      componentProps: {                       // Data to pass to the modal component
+        searchResult: result                  // Pass the selected search result
+      },
+      breakpoints: [0, 0.5, 0.8, 1],        // Responsive breakpoints for modal height
+      initialBreakpoint: 0.8                 // Start at 80% screen height
+    });
+
+    // 🎬 Present the modal with slide-up animation
+    await modal.present();
+
+    // 📝 Optional: Listen for when modal is dismissed
+    // const { data } = await modal.onDidDismiss();
+    // console.log('Modal dismissed with data:', data);
   }
 
   // 🔧 Utility Methods - Helper functions to test
