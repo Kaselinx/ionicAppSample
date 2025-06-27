@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="login-container">
+    <!-- App Logo/Title -->
+    <div class="app-header">
+      <h1>TSApp</h1>
+      <p>Welcome back! Please sign in to continue.</p>
+    </div>
+
+    <!-- Login Form -->
+    <ion-card class="login-card">
+      <ion-card-header>
+        <ion-card-title>Sign In</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+          <!-- Username Input -->
+          <ion-item class="input-item">
+            <ion-icon name="person-outline" slot="start" color="medium"></ion-icon>
+            <ion-label position="stacked">Username</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="credentials.username"
+              name="username"
+              placeholder="Enter your username"
+              required
+              autocomplete="username"
+              [disabled]="isLoading">
+            </ion-input>
+          </ion-item>
+
+          <!-- Password Input -->
+          <ion-item class="input-item">
+            <ion-icon name="lock-closed-outline" slot="start" color="medium"></ion-icon>
+            <ion-label position="stacked">Password</ion-label>
+            <ion-input
+              type="password"
+              [(ngModel)]="credentials.password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              autocomplete="current-password"
+              [disabled]="isLoading">
+            </ion-input>
+          </ion-item>
+
+          <!-- Login Button -->
+          <ion-button
+            expand="block"
+            type="submit"
+            class="login-button"
+            [disabled]="isLoading || !loginForm.form.valid">
+            <ion-icon name="log-in-outline" slot="start" *ngIf="!isLoading"></ion-icon>
+            <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+            {{ isLoading ? 'Signing In...' : 'Sign In' }}
+          </ion-button>
+        </form>
+
+        <!-- Demo Credentials Helper -->
+        <div class="demo-section">
+          <p class="demo-text">Demo Credentials:</p>
+          <ion-button
+            fill="outline"
+            size="small"
+            (click)="fillDemoCredentials()"
+            [disabled]="isLoading">
+            Use Demo Login
+          </ion-button>
+          <p class="demo-info">Username: demo, Password: password</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      <p>Ionic Angular Capacitor Hybrid App</p>
+    </div>
+  </div>
+</ion-content>

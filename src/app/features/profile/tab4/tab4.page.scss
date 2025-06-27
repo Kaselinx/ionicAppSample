@@ -1,0 +1,136 @@
+.profile-container {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile-card {
+  margin-bottom: 16px;
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+    
+    .profile-info {
+      flex: 1;
+      
+      h2 {
+        margin: 0 0 4px 0;
+        color: var(--ion-color-dark);
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+      
+      p {
+        margin: 0;
+        color: var(--ion-color-medium);
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.details-card {
+  margin-bottom: 16px;
+  
+  ion-card-title {
+    color: var(--ion-color-primary);
+    font-size: 1.2rem;
+  }
+  
+  ion-list {
+    background: transparent;
+    
+    ion-item {
+      --background: transparent;
+      --border-color: var(--ion-color-light);
+      --border-width: 0 0 1px 0;
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      
+      &:last-child {
+        --border-width: 0;
+      }
+      
+      ion-icon {
+        margin-right: 12px;
+      }
+      
+      ion-label {
+        h3 {
+          color: var(--ion-color-dark);
+          font-weight: 500;
+          margin-bottom: 4px;
+        }
+        
+        p {
+          color: var(--ion-color-medium);
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+.actions-card {
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    ion-button {
+      --border-radius: 8px;
+      height: 44px;
+      
+      ion-icon {
+        margin-right: 8px;
+      }
+      
+      &[color="danger"] {
+        margin-top: 8px;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 12px;
+  }
+  
+  .profile-card .profile-header {
+    gap: 12px;
+    
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+    }
+    
+    .profile-info h2 {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .profile-info h2 {
+    color: var(--ion-color-light);
+  }
+  
+  .details-card ion-item ion-label h3 {
+    color: var(--ion-color-light);
+  }
+}

@@ -1,0 +1,115 @@
+// Red and White Theme for TSApp
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+/** Ionic CSS Variables **/
+:root {
+  /** Primary Color - Red Theme **/
+  --ion-color-primary: #dc2626;
+  --ion-color-primary-rgb: 220, 38, 38;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #c22222;
+  --ion-color-primary-tint: #e03c3c;
+
+  /** Secondary Color - Light Red **/
+  --ion-color-secondary: #ef4444;
+  --ion-color-secondary-rgb: 239, 68, 68;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #d23c3c;
+  --ion-color-secondary-tint: #f15757;
+
+  /** Tertiary Color - Dark Red **/
+  --ion-color-tertiary: #991b1b;
+  --ion-color-tertiary-rgb: 153, 27, 27;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #871818;
+  --ion-color-tertiary-tint: #a33232;
+
+  /** Success Color - Keep Green **/
+  --ion-color-success: #10b981;
+  --ion-color-success-rgb: 16, 185, 129;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #0ea372;
+  --ion-color-success-tint: #28c194;
+
+  /** Warning Color - Orange **/
+  --ion-color-warning: #f59e0b;
+  --ion-color-warning-rgb: 245, 158, 11;
+  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: #d8890a;
+  --ion-color-warning-tint: #f6a824;
+
+  /** Danger Color - Darker Red **/
+  --ion-color-danger: #b91c1c;
+  --ion-color-danger-rgb: 185, 28, 28;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #a31919;
+  --ion-color-danger-tint: #c03333;
+
+  /** Light Colors - White Theme **/
+  --ion-color-light: #f8fafc;
+  --ion-color-light-rgb: 248, 250, 252;
+  --ion-color-light-contrast: #1f2937;
+  --ion-color-light-contrast-rgb: 31, 41, 55;
+  --ion-color-light-shade: #dae1e7;
+  --ion-color-light-tint: #f9fbfc;
+
+  /** Medium Colors - Light Gray **/
+  --ion-color-medium: #6b7280;
+  --ion-color-medium-rgb: 107, 114, 128;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #5e6470;
+  --ion-color-medium-tint: #7a818e;
+
+  /** Dark Colors - Dark Gray **/
+  --ion-color-dark: #1f2937;
+  --ion-color-dark-rgb: 31, 41, 55;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1c2430;
+  --ion-color-dark-tint: #35404b;
+
+  /** Background Colors - White Theme **/
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255, 255, 255;
+
+  --ion-text-color: #1f2937;
+  --ion-text-color-rgb: 31, 41, 55;
+
+  --ion-color-step-50: #f9fafb;
+  --ion-color-step-100: #f3f4f6;
+  --ion-color-step-150: #e5e7eb;
+  --ion-color-step-200: #d1d5db;
+  --ion-color-step-250: #9ca3af;
+  --ion-color-step-300: #6b7280;
+  --ion-color-step-350: #4b5563;
+  --ion-color-step-400: #374151;
+  --ion-color-step-450: #1f2937;
+  --ion-color-step-500: #111827;
+  --ion-color-step-550: #0f172a;
+  --ion-color-step-600: #0c1220;
+  --ion-color-step-650: #080e1a;
+  --ion-color-step-700: #050a14;
+  --ion-color-step-750: #02060e;
+  --ion-color-step-800: #000308;
+  --ion-color-step-850: #000002;
+  --ion-color-step-900: #000000;
+  --ion-color-step-950: #000000;
+
+  /** Toolbar Colors **/
+  --ion-toolbar-background: #dc2626;
+  --ion-toolbar-color: #ffffff;
+
+  /** Tab Bar Colors - Red Background Theme **/
+  --ion-tab-bar-background: #dc2626;
+  --ion-tab-bar-color: rgba(255, 255, 255, 0.7);
+  --ion-tab-bar-color-selected: #ffffff;
+  --ion-tab-bar-border-color: #b91c1c;
+}

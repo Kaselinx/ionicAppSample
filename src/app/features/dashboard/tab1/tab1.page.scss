@@ -1,0 +1,113 @@
+.home-container {
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.welcome-card {
+  margin-bottom: 16px;
+
+  ion-card-title {
+    color: var(--ion-color-primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  ion-card-subtitle {
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+  }
+}
+
+.message-card {
+  margin-bottom: 16px;
+
+  ion-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    ion-icon {
+      color: var(--ion-color-secondary);
+    }
+  }
+
+  .loading-container {
+    text-align: center;
+    padding: 20px;
+
+    ion-spinner {
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--ion-color-medium);
+      margin: 0;
+    }
+  }
+
+  .message-container {
+    h3 {
+      color: var(--ion-color-dark);
+      margin: 0 0 12px 0;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .message-timestamp {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--ion-color-medium);
+      font-size: 0.85rem;
+      margin: 8px 0;
+
+      ion-icon {
+        font-size: 0.9rem;
+      }
+    }
+
+    ion-chip {
+      margin: 8px 0 16px 0;
+    }
+  }
+}
+
+.actions-card {
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    ion-button {
+      --border-radius: 8px;
+      height: 44px;
+
+      ion-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .home-container {
+    padding: 12px;
+  }
+
+  .welcome-card ion-card-title {
+    font-size: 1.2rem;
+  }
+
+  .message-container h3 {
+    font-size: 1rem;
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .message-container h3 {
+    color: var(--ion-color-light);
+  }
+}
