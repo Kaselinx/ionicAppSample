@@ -19,14 +19,22 @@ import {
   IonIcon,
   IonChip,
   IonSpinner,
-  IonPopover,
+  IonModal,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
   ToastController,
-  AlertController
+  ModalController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
   searchOutline,
-  closeOutline
+  closeOutline,
+  personOutline,
+  calendarOutline,
+  documentTextOutline,
+  informationCircleOutline
 } from 'ionicons/icons';
 
 // Import services and components
@@ -39,6 +47,9 @@ export interface SearchResult {
   title: string;
   description: string;
   category: string;
+  author: string;
+  date: string;
+  summary: string;
 }
 
 @Component({
@@ -61,6 +72,11 @@ export interface SearchResult {
     IonIcon,
     IonChip,
     IonSpinner,
+    IonModal,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardContent,
     MenuComponent
   ]
 })
@@ -74,11 +90,11 @@ export class Tab2Page implements OnInit {
 
   // 🗄️ Mock data for demonstration
   private mockData: SearchResult[] = [
-    { id: 1, title: 'Angular Basics', description: 'Learn Angular fundamentals', category: 'Tutorial' },
-    { id: 2, title: 'TypeScript Guide', description: 'Master TypeScript programming', category: 'Guide' },
-    { id: 3, title: 'Ionic Components', description: 'Explore Ionic UI components', category: 'Reference' },
-    { id: 4, title: 'RxJS Observables', description: 'Reactive programming with RxJS', category: 'Tutorial' },
-    { id: 5, title: 'Unit Testing', description: 'Testing Angular applications', category: 'Guide' }
+    { id: 1, title: 'Angular Basics', description: 'Learn Angular fundamentals', category: 'Tutorial' , author: 'Ron' , date: '2023-01-01' , summary: 'This is a summary of the Angular Basics tutorial'  },
+    { id: 2, title: 'TypeScript Guide', description: 'Master TypeScript programming', category: 'Guide', author: 'Jason' , date: '2023-02-01' , summary: 'This is a summary of the TypeScript Guide' },
+    { id: 3, title: 'Ionic Components', description: 'Explore Ionic UI components', category: 'Reference', author: 'John' , date: '2023-03-01' , summary: 'This is a summary of the Ionic Components reference' },
+    { id: 4, title: 'RxJS Observables', description: 'Reactive programming with RxJS', category: 'Tutorial', author: 'Summer' , date: '2023-04-01' , summary: 'This is a summary of the RxJS Observables tutorial' },
+    { id: 5, title: 'Unit Testing', description: 'Testing Angular applications', category: 'Guide', author: 'Victor' , date: '2023-05-01' , summary: 'This is a summary of the Unit Testing guide' }
   ];
 
   constructor(private toastController: ToastController) {

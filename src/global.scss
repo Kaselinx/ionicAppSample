@@ -26,12 +26,161 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 /**
- * Ionic Dark Mode
+ * Red and White Theme - Light Mode Only
  * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
+ * Disabled dark mode to maintain consistent red and white theme
  */
 
+/* Dark mode imports are commented out for red/white theme */
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* @import '@ionic/angular/css/palettes/dark.system.css'; */
+
+/**
+ * Custom Red and White Theme Styles
+ * -----------------------------------------------------
+ */
+
+/* Ensure white background for all content areas */
+ion-content {
+  --background: #ffffff;
+  --color: #1f2937;
+}
+
+/* Red header styling */
+ion-header ion-toolbar {
+  --background: var(--ion-color-primary);
+  --color: #ffffff;
+}
+
+/* White card styling with subtle shadows */
+ion-card {
+  --background: #ffffff;
+  --color: #1f2937;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
+  border: 1px solid #fee2e2;
+}
+
+/* Tab bar styling - Red background with white text */
+ion-tab-bar {
+  --background: var(--ion-color-primary);
+  --color: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid #b91c1c;
+}
+
+ion-tab-button {
+  --color: rgba(255, 255, 255, 0.7);
+  --color-selected: #ffffff;
+}
+
+ion-tab-button.tab-selected {
+  --color: #ffffff;
+  --background: rgba(255, 255, 255, 0.1);
+}
+
+/* Tab button icons and labels */
+ion-tab-button ion-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+ion-tab-button.tab-selected ion-icon {
+  color: #ffffff;
+}
+
+ion-tab-button ion-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+ion-tab-button.tab-selected ion-label {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Button styling */
+ion-button {
+  --border-radius: 8px;
+}
+
+ion-button.button-fill-solid {
+  --background: var(--ion-color-primary);
+  --color: #ffffff;
+}
+
+/* Input styling */
+ion-input, ion-searchbar {
+  --background: #f8fafc;
+  --color: #1f2937;
+  --border-color: #fee2e2;
+}
+
+/* List styling */
+ion-list {
+  --background: #ffffff;
+}
+
+ion-item {
+  --background: #ffffff;
+  --color: #1f2937;
+  --border-color: #fee2e2;
+}
+
+/* Popover styling for menu */
+ion-popover {
+  --background: #ffffff;
+  --color: #1f2937;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.15);
+}
+
+/* Chip styling */
+ion-chip {
+  --background: #fee2e2;
+  --color: var(--ion-color-primary);
+}
+
+ion-chip.chip-outline {
+  --border-color: var(--ion-color-primary);
+  --color: var(--ion-color-primary);
+}
+
+/* Alert styling */
+.alert-wrapper {
+  --background: #ffffff;
+  --color: #1f2937;
+}
+
+.alert-button {
+  --color: var(--ion-color-primary);
+}
+
+/* Toast styling */
+.toast-wrapper {
+  --background: #ffffff;
+  --color: #1f2937;
+  --border: 1px solid #fee2e2;
+}
+
+.toast-wrapper.toast-color-success {
+  --background: #10b981;
+  --color: #ffffff;
+}
+
+.toast-wrapper.toast-color-danger {
+  --background: var(--ion-color-danger);
+  --color: #ffffff;
+}
+
+/* Loading spinner styling */
+.loading-wrapper {
+  --background: rgba(255, 255, 255, 0.95);
+  --color: #1f2937;
+}
+
+/* Searchbar styling */
+ion-searchbar {
+  --background: #f8fafc;
+  --color: #1f2937;
+  --placeholder-color: #6b7280;
+  --icon-color: var(--ion-color-primary);
+  --clear-button-color: var(--ion-color-primary);
+}

@@ -1,5 +1,5 @@
 .login-content {
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
 }
 
 .login-container {
@@ -144,16 +144,19 @@
   .login-card ion-card-content { padding: 16px; }
 }
 
-// Dark mode support
+// Red theme override for dark mode preference (maintain light theme)
 @media (prefers-color-scheme: dark) {
+  .login-content {
+    --background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+  }
   .login-card {
-    background: rgba(30, 30, 30, 0.95);
-    ion-card-title { color: var(--ion-color-primary-tint); }
+    background: rgba(255, 255, 255, 0.95);
+    ion-card-title { color: var(--ion-color-primary); }
   }
   .input-item {
-    --background: #2a2a2a;
-    --border-color: #404040;
-    ion-label { color: var(--ion-color-light); }
+    --background: #f8fafc;
+    --border-color: #fee2e2;
+    ion-label { color: var(--ion-color-dark); }
   }
-  .demo-section { border-top-color: #404040; }
+  .demo-section { border-top-color: #fee2e2; }
 }
